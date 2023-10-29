@@ -4,7 +4,7 @@ dotenv.config();
 const USERNAME = process.env.DB_USERNAME
 const PASSWORD = process.env.DB_PASSWORD
 const connection = async()=>{
-const URL = `mongodb://${USERNAME}:${PASSWORD}@cluster0-shard-00-00.hjvio.mongodb.net:27017,cluster0-shard-00-01.hjvio.mongodb.net:27017,cluster0-shard-00-02.hjvio.mongodb.net:27017/?ssl=true&replicaSet=atlas-dovdzg-shard-0&authSource=admin&retryWrites=true&w=majority`
+const URL = `mongodb+srv://prajktapotdar8330:praju5464@cluster0.huzovs4.mongodb.net/LearnIt?retryWrites=true&w=majority`
     try {
 
     await mongoose.connect(URL,{useUnifiedTopology:true})
