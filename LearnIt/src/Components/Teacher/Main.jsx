@@ -17,7 +17,8 @@ export default function Main() {
 
 <Link to='/Class_alloted'>
             <div className='btn btn-primary' >Class Allotted</div>   </Link>
-            
+            <Link to='/Classes'>
+            <div className='btn btn-primary' >Class Allotted</div>   </Link>
             <Link to='/Performance'>
             <div className='btn btn-primary' >Performance</div>   </Link>
 
