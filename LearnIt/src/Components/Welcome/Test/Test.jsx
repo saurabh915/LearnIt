@@ -15,7 +15,7 @@ function Test() {
       </div>
       <div className='tright'>
         <h2 style={{position:"absolute", top:"28px"}}>Check Your Grasping Power</h2>
-        <button onClick={GiveCurrent}className="btn btn-primary">Give Test</button>
+        <button onClick={GiveCurrent} className="btn btn-primary">Give Test</button>
       </div>
     </div>
    

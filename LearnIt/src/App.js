@@ -2,9 +2,7 @@ import './App.css';
 import Navbar from './Components/Navbar/Navbar.jsx';
 import Form from './Components/Login/Form';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import '../node_modules/bootstrap-dark-5/dist/css/bootstrap-dark.min.css';
-import '../node_modules/bootstrap/dist/js/bootstrap.bundle';
-import '../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js';
+
 
 import Performance from './Components/Performance/Performance';
 import Main from './Components/Teacher/Main';
@@ -15,8 +13,8 @@ import Student_List from './Components/Teacher/Student_List';
 import Subject_Selection from './Components/Teacher/Subject_Selection';
 import Class_alloted from './Components/Teacher/Class_alloted';
 import Welcome from './Components/Welcome/Welcome';
-
-
+import Test from './Components/Welcome/Test/Test'
+import Subjects from './Components/Welcome/Test/Subjects/Subjects'
 
 function App() {
   return (
@@ -32,6 +30,8 @@ function App() {
     <Route exact path = "/Parent" element ={<Form />} />
     <Route exact path = "/Teacher" element ={<Form />} />
     <Route exact path = "/Welcome" element ={<Welcome />} />
+    <Route exact path = "/test" element ={<Test />} />
+    <Route exact path = "/subjects" element ={<Subjects />} />
 
    {/* <----------------- Teacher Section ------------> */}
 

@@ -11,26 +11,23 @@ function Form() {
     let navigate = useNavigate();
     const [credentials, setCredentials] = useState({ email: "", password: ""})
     const [error, setError] = useState(""); 
-    const handleSubmit=async (e)=>{
-        e.preventDefault();
-        localStorage.setItem('data',credentials);
-        navigate("/welcome");
-
-    }
+ 
     const onChange = (e) => {
         //this will help to change the update note form
         setCredentials({ ...credentials, [e.target.name]: e.target.value });
       }
       const   handleClick = async(e) =>  {
         e.preventDefault();
+        console.log(credentials);
         if (!credentials.email || !credentials.password) {
             setError("Please fill out both email and password!");
             return;
         }
        
         const a = await login(credentials);
+        const json = await a.json();
        
-        if (a.success) {   // Assuming there's a success field in the response. Adjust as needed.
+        if (json.success) {   // Assuming there's a success field in the response. Adjust as needed.
             navigate("/welcome");
         }
       }
@@ -46,7 +43,7 @@ function Form() {
     </div>
     <div class="mb-3 row">
       <label htmlFor="exampleInputPassword1" class="form-label">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1"/>
+      <input type="password" name='password' class="form-control" onChange={onChange} id="exampleInputPassword1"/>
     </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>

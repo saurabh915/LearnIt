@@ -1,5 +1,5 @@
-import { addUser } from "../controller/user-contoller.js";
+import { login } from "../controller/user-contoller.js";
 import express from "express";
 const route = express.Router();
-route.post('/addUser', addUser);
+route.post('/login', login);
 export default route;
