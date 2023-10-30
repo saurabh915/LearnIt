@@ -1,13 +1,11 @@
-import { res } from "express";
+import User from "../model/user.js";
 
-export const addUser = async(req,res)=>{
+export const addUser = async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        // Validate if the email and password exist in your database
-        const user = await User.findOne({
-            where: { email, password }, // Replace with your database query
-        });
+        // Validate if the email and password exist in your MongoDB database
+        const user = await User.findOne({ email, password });
 
         if (user) {
             // User exists in the database
@@ -19,4 +17,4 @@ export const addUser = async(req,res)=>{
     } catch (error) {
         return res.status(500).json(error);
     }
-}
+};
