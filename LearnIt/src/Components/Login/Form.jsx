@@ -1,7 +1,7 @@
 import React , { useState }from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import './Form.css'
-import { addUser } from "../../service/studentapi";
+import { login } from "../../service/studentapi";
 
 
 function Form() {
@@ -10,6 +10,7 @@ function Form() {
   const pathWithoutSlash = currentPath.substring(1);
     let navigate = useNavigate();
     const [credentials, setCredentials] = useState({ email: "", password: ""})
+    const [error, setError] = useState(""); 
     const handleSubmit=async (e)=>{
         e.preventDefault();
         localStorage.setItem('data',credentials);
@@ -21,12 +22,17 @@ function Form() {
         setCredentials({ ...credentials, [e.target.name]: e.target.value });
       }
       const   handleClick = async(e) =>  {
-        e.preventDefault()
-        let data = "something"
-        console.log(data)
-     const a = await addUser(data);
-     console.log(a);
-     alert(a.msg);
+        e.preventDefault();
+        if (!credentials.email || !credentials.password) {
+            setError("Please fill out both email and password!");
+            return;
+        }
+       
+        const a = await login(credentials);
+       
+        if (a.success) {   // Assuming there's a success field in the response. Adjust as needed.
+            navigate("/welcome");
+        }
       }
   return (
     <>

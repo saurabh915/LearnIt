@@ -1,18 +1,22 @@
-import { response } from "express";
+import { res } from "express";
 
 export const addUser = async(req,res)=>{
     try {
-        console.log(req.body);
-     
- 
-        res.status(200).json({msg:'message from server: Task Complete zali Kay ??'})
-    
-      
+        const { email, password } = req.body;
 
-   
-return ;
+        // Validate if the email and password exist in your database
+        const user = await User.findOne({
+            where: { email, password }, // Replace with your database query
+        });
 
-} catch (error) {
-    return res.status(500).json(error)
-}
+        if (user) {
+            // User exists in the database
+            return res.status(200).json({ message: "User validated successfully" });
+        } else {
+            // User does not exist in the database
+            return res.status(401).json({ message: "Invalid email or password" });
+        }
+    } catch (error) {
+        return res.status(500).json(error);
+    }
 }

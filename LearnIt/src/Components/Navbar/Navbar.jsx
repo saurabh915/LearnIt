@@ -9,7 +9,7 @@ function Navbar() {
         
         <div className="n-left">
           <div className='logo'></div>
-            <div className="n-name">Shiksha Portal</div>
+            <div className="n-name">LearnIt</div>
             {/* for toggle component usecontext hook is used which helps to change the state of darkmode and change buttom position*/}
            
         </div>
