@@ -15,7 +15,7 @@ export default function Main() {
       
       {/*<---------------------------- Class Allotted section-----------------------> */}
 
-<Link to='/Class_alloted'>
+<Link to='/Classes'>
             <Button >Class Allotted</Button>   </Link>
             
             <Link to='/Performance'>

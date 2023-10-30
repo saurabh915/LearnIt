@@ -15,6 +15,7 @@ import Student_List from './Components/Teacher/Student_List';
 import Subject_Selection from './Components/Teacher/Subject_Selection';
 import Class_alloted from './Components/Teacher/Class_alloted';
 import Welcome from './Components/Welcome/Welcome';
+import Classes from './Components/Teacher/Classes';
 
 
 
@@ -36,6 +37,7 @@ function App() {
    {/* <----------------- Teacher Section ------------> */}
 
     <Route exact path = "/main" element ={<Main />} />
+    <Route exact path = "/classes" element ={<Classes/>}/>
     <Route exact path = "/class_alloted" element ={<Class_alloted />} />
     <Route exact path = "/Student_List" element ={<Student_List />} />
     <Route exact path = "/Subject_Selection" element ={<Subject_Selection />} />
