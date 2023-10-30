@@ -14,7 +14,7 @@ function Form() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         localStorage.setItem('data', JSON.stringify(credentials));
-        navigate("/welcome");
+        navigate("/");
     };
 
     const onChange = (e) => {
