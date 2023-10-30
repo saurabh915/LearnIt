@@ -5,21 +5,21 @@ const StudentList = () => {
   const [students] = useState([
     {
       name: "John Doe",
-      usn: "19CS101",
+      school_id: "19CS101",
       branch: "Computer Science",
       section: "A",
       cgpa: 9.5,
     },
     {
       name: "Jane Doe",
-      usn: "19CS102",
+      school_id: "19CS102",
       branch: "Computer Science",
       section: "B",
       cgpa: 9.0,
     },
     {
       name: "Peter Parker",
-      usn: "19CS103",
+      school_id: "19CS103",
       branch: "Computer Science",
       section: "C",
       cgpa: 8.5,
@@ -30,6 +30,24 @@ const StudentList = () => {
     // Fetch the student data from an API or database here
     // and set the students state variable
   }, []);
+  // useEffect(() => {
+  //   fetch("https;//localhost:8000/adduser") // replace with your actual API endpoint
+  //     .then((response) => {
+  //       if (!response.ok) {
+  //         throw new Error("Failed to fetch student data.");
+  //       }
+  //       return response.json();
+  //     })
+  //     .then((data) => {
+  //       setStudents(data);  // Assuming your backend sends the data as an array
+  //       setLoading(false);
+  //     })
+  //     .catch((err) => {
+  //       setError(err.message);
+  //       setLoading(false);
+  //     });
+  // }, []);
+
 
   const renderStudentList = () => {
     return (
@@ -37,7 +55,7 @@ const StudentList = () => {
         <thead>
           <tr>
             <th>Name</th>
-            <th>USN</th>
+            <th>School_id</th>
             <th>Branch</th>
             <th>Section</th>
             <th>CGPA</th>
@@ -45,9 +63,9 @@ const StudentList = () => {
         </thead>
         <tbody>
           {students.map((student) => (
-            <tr key={student.usn}>
+            <tr key={student.school_id}>
               <td>{student.name}</td>
-              <td>{student.usn}</td>
+              <td>{student.school_id}</td>
               <td>{student.branch}</td>
               <td>{student.section}</td>
               <td>{student.cgpa}</td>
