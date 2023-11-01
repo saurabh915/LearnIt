@@ -1,26 +1,30 @@
 import React, { useEffect, useState } from 'react'
-
+import { useNavigate } from 'react-router-dom';
 function Subjects() {
-    const [subjects, setSubjects] = useState(["Physics","Physics","Physics","Physics","Physics"]);
-    useEffect(() => {
-        // Fetch subjects from your server
-        fetch('https://your-server-api.com/subjects')
-          .then((response) => response.json())
-          .then((data) => setSubjects(data))
-          .catch((error) => console.error('Error fetching subjects:', error));
-      }, []);
-  
-    return (
+  const [subjects, setSubjects] = useState(["Physics", "chemistry", "maths", "Physics", "Physics"]);
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    // Fetch subjects from your server
+    fetch('https://your-server-api.com/subjects')
+      .then((response) => response.json())
+      .then((data) => setSubjects(data))
+      .catch((error) => console.error('Error fetching subjects:', error));
+  }, []);
+  const giveTest = (subject) => {
+    navigate(`/${subject}quiz`)
+  }
+  return (
     <>
-     <div>
-      <h2>Subjects</h2>
-      <div className="button-container border  ">
-        {subjects.map((subject, index) => (
-          <button className="btn m-2 btn-primary " key={index}>{subject}</button>
-        ))}
+      <div>
+        <h2>Subjects</h2>
+        <div className="button-container border  ">
+          {subjects.map((subject, index) => (
+            <button onClick={() => { giveTest(subject) }} className="btn m-2 btn-primary " key={index}>{subject}</button>
+          ))}
+        </div>
       </div>
-    </div>
-    
+
     </>
   )
 }
