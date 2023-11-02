@@ -1,56 +1,56 @@
-import React , { useState }from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
-import './Form.css'
+import React, { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { login } from "../../service/studentapi";
-
+import './Form.css';
 
 function Form() {
   const location = useLocation();
   const currentPath = location.pathname;
   const pathWithoutSlash = currentPath.substring(1);
-    let navigate = useNavigate();
-    const [credentials, setCredentials] = useState({ email: "", password: ""})
-    const [error, setError] = useState(""); 
- 
-    const onChange = (e) => {
-        //this will help to change the update note form
-        setCredentials({ ...credentials, [e.target.name]: e.target.value });
-      }
-      const   handleClick = async(e) =>  {
-        e.preventDefault();
-        console.log(credentials);
-        if (!credentials.email || !credentials.password) {
-            setError("Please fill out both email and password!");
-            return;
-        }
-       
-        const a = await login(credentials);
-        const json = await a.json();
-       
-        if (json.success) {   // Assuming there's a success field in the response. Adjust as needed.
-            navigate("/welcome");
-        }
-      }
-  return (
-    <>
-        {<span >{pathWithoutSlash} Login</span>}
-    <div className='form'>
-    <form onSubmit={handleClick} >
-    <div class="mb-3 row ">
-      <label htmlFor="exampleInputEmail1" class="form-label">Email address</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" value={credentials.email} onChange={onChange} name = "email" aria-describedby="emailHelp"/>
-      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-    </div>
-    <div class="mb-3 row">
-      <label htmlFor="exampleInputPassword1" class="form-label">Password</label>
-      <input type="password" name='password' class="form-control" onChange={onChange} id="exampleInputPassword1"/>
-    </div>
+  let navigate = useNavigate();
+  const [credentials, setCredentials] = useState({ email: "", password: "" });
+  const [error, setError] = useState("");
 
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
-  </div>
-    </>
-  )
+  const onChange = (e) => {
+    setCredentials({ ...credentials, [e.target.name]: e.target.value });
+  }
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+
+    if (!credentials.email || !credentials.password) {
+      setError("Please fill out both email and password!");
+      return;
+    }
+
+    const a = await login(credentials);
+    const json = await a.json();
+
+    if (json.success) {
+      navigate("/welcome");
+    }
+  }
+
+  return (
+    <div className="login-container">
+      <span className="login-heading">{pathWithoutSlash} Login</span>
+      <div className="form">
+        <form onSubmit={handleClick}>
+          <div className="form-group">
+            <label htmlFor="exampleInputEmail1">Email address</label>
+            <input type="email" className="form-control" id="exampleInputEmail1" value={credentials.email} onChange={onChange} name="email" aria-describedby="emailHelp" />
+            <small id="emailHelp" className="form-text">We'll never share your email with anyone else.</small>
+          </div>
+          <div className="form-group">
+            <label htmlFor="exampleInputPassword1">Password</label>
+            <input type="password" name="password" className="form-control" onChange={onChange} id="exampleInputPassword1" />
+          </div>
+
+          <button type="submit" className="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  );
 }
 
-export default Form
+export default Form;
