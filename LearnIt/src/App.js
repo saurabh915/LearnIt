@@ -17,6 +17,7 @@ import Test from './Components/Welcome/Test/Test'
 import Subjects from './Components/Welcome/Test/Subjects/Subjects'
 import Classes from './Components/Teacher/Classes';
 import CurrentQuiz from './Components/Welcome/Test/Quiz/CurrentQuiz'
+import HomePage from './Components/Home.jsx';
 import Quiz from './Components/Welcome/Test/Subjects/SingleQuiz/Quiz.js'
 function App() {
   return (
@@ -27,7 +28,9 @@ function App() {
       <Router>
 
         <Navbar />
+
         <Routes>
+          <Route exact path="/" element={<HomePage />} />
           <Route exact path="/Student" element={<Form />} />
           <Route exact path="/Parent" element={<Form />} />
           <Route exact path="/Teacher" element={<Form />} />
