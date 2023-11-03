@@ -2,6 +2,11 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+
+        background-color: hsla(205, 86%, 47%, 0.7);
+   
     }
     .left{
         /* display: block; */
@@ -20,7 +25,7 @@
         display: flex;
         height: 500px;
         flex-direction: column;
-        width:800px;
+        width:600px;
         position: relative;
         align-items: center;
         justify-content: center;
