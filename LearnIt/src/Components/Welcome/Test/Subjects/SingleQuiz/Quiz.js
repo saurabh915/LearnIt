@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { QuizData } from './Data/QuizData'
 import QuizResult from './QuizResult';
-//import  './Quiz.css';
+import  './Quiz.css';
 function Quiz() {
     const [currentQuestion,setCurrentQuestion]=useState(0);
     const [score,setScore] = useState(0);
@@ -44,6 +44,7 @@ function Quiz() {
                 {QuizData[currentQuestion].options.map((option,i)=>{
                     return(
                         <button 
+                        style={{ variant: "contained"}}
                         // className="option-btn"
                         className={`option-btn ${
                             clickedOption == i+1?"checked":null

@@ -1,50 +1,17 @@
 import mongoose from "mongoose";
 
-// Define a schema for the student data
-const studentDomainSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true,
-    },
+const userSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
         unique: true,
     },
-    class: {
+    password: {
         type: String,
-        required: true,
-    },
-    Marks: {
-        hindi: {
-            type: Number,
-            required: true,
-        },
-        english: {
-            type: Number,
-            required: true,
-        },
-        maths: {
-            type: Number,
-            required: true,
-        },
-        science: {
-            type: Number,
-            required: true,
-        },
-        social: {
-            type: Number,
-            required: true,
-        },
-    },
-    AverageMarks: {
-        type: Number,
         required: true,
     },
 });
 
-// model for the student data
-const StudentDomain = mongoose.model("StudentDomain", studentDomainSchema);
+const User = mongoose.model('User', userSchema);
 
-export default StudentDomain;
-
+export default User;
