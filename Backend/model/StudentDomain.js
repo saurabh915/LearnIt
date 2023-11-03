@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 // Define a schema for the student data
-const studentDomainSchema = new mongoose.Schema({
+const StudentDomainSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -44,7 +44,7 @@ const studentDomainSchema = new mongoose.Schema({
 });
 
 // model for the student data
-const StudentDomain = mongoose.model("StudentDomain", studentDomainSchema);
+const StudentDomain = mongoose.model("studentdomains", StudentDomainSchema);
 
 export default StudentDomain;
 
