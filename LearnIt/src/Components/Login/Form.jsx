@@ -27,6 +27,7 @@ function Form() {
     const json = await a.json();
 
     if (json.success) {
+      localStorage.setItem("email", json.email);
       navigate("/welcome");
     }
   }

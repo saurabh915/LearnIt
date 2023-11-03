@@ -39,7 +39,7 @@ function App() {
           <Route exact path="/subjects" element={<Subjects />} />
 
           {/* quiz */}
-          <Route exact path="/Physicsquiz" element={<CurrentQuiz />} />
+          <Route exact path="/Physicsquiz" element={<Quiz />} />
           <Route exact path="/performance" element={<Performance />} />
 
           {/* <----------------- Teacher Section ------------> */}

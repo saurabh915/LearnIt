@@ -5,5 +5,5 @@ import express from "express";
 const route = express.Router();
 route.post('/login', login);
 route.get('/quiz', quiz);
-route.get('/studentdata', studentdata);
+route.post('/studentdata', studentdata);
 export default route;
