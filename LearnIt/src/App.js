@@ -1,4 +1,6 @@
 import './App.css';
+
+
 import Navbar from './Components/Navbar/Navbar.jsx';
 import Form from './Components/Login/Form';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
@@ -15,8 +17,8 @@ import Class_alloted from './Components/Teacher/Class_alloted';
 import Welcome from './Components/Welcome/Welcome';
 import Test from './Components/Welcome/Test/Test'
 import Subjects from './Components/Welcome/Test/Subjects/Subjects'
-import Classes from './Components/Teacher/Classes';
-import CurrentQuiz from './Components/Welcome/Test/Quiz/CurrentQuiz'
+import Classes from './Components/Teacher/Classes'
+
 function App() {
   return (
 
@@ -33,7 +35,7 @@ function App() {
           <Route exact path="/Welcome" element={<Welcome />} />
           <Route exact path="/test" element={<Test />} />
           <Route exact path="/subjects" element={<Subjects />} />
-          <Route exact path="/quiz" element={<CurrentQuiz />} />
+          <Route exact path="/quiz" element={<Quiz/>}/>
 
           {/* <----------------- Teacher Section ------------> */}
 
