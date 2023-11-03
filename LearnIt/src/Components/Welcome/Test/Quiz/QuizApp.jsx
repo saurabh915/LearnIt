@@ -1,8 +1,9 @@
-// import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
-// import Question from './Question';
-// function QuizApp() {
-//     const [quizData, setQuizData] = useState([]);
+//this is my QuizApp.jsx
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import Question from './Question';
+function QuizApp() {
+    const [quizData, setQuizData] = useState([]);
 
 //     useEffect(() => {
 //         // Replace 'your-api-endpoint' with your actual API endpoint to fetch quiz data from MongoDB.
