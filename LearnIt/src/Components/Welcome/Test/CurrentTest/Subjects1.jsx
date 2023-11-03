@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 function Subjects() {
-  const [subjects, setSubjects] = useState(["Physics", "chemistry", "maths", "Physics", "Physics"]);
+  const [subjects, setSubjects] = useState(["Science", "Maths", "Social Science", "Hindi", "Engish"]);
 
   const navigate = useNavigate();
   useEffect(() => {

@@ -7,7 +7,7 @@ function Welcome() {
     navigate('/performance')
   }
   function GiveTest(){
-    navigate('/test')
+    navigate('/TestScreen')
   }
     return (
     <>

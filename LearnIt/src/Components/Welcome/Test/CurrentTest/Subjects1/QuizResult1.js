@@ -1,6 +1,6 @@
 import React from 'react'
 
-function QuizResult(props) {
+function QuizResult1(props) {
   return (
     <>
     <div className='show-score'>
@@ -12,4 +12,4 @@ function QuizResult(props) {
   )
 }
 
-export default QuizResult
+export default QuizResult1;

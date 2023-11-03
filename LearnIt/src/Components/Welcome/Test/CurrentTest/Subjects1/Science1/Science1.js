@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { QuizData } from './Data/QuizData'
-import QuizResult from './QuizResult';
-import  './Quiz.css';
-function Quiz() {
+import { Sciencedata1 } from './Sciencedata1';
+import QuizResult from '../QuizResult1';
+import  '../Quiz1.css';
+function Science1() {
     const [currentQuestion,setCurrentQuestion]=useState(0);
     const [score,setScore] = useState(0);
     const [clickedOption,setClickedOption]=useState(0);
@@ -10,7 +10,7 @@ function Quiz() {
     
     const changeQuestion = ()=>{
         updateScore();
-        if(currentQuestion< QuizData.length-1){
+        if(currentQuestion< Sciencedata1.length-1){
             setCurrentQuestion(currentQuestion+1);
             setClickedOption(0);
         }else{
@@ -18,7 +18,7 @@ function Quiz() {
         }
     }
     const updateScore=()=>{
-        if(clickedOption===QuizData[currentQuestion].answer){
+        if(clickedOption===Sciencedata1[currentQuestion].answer){
             setScore(score+1);
         }
     }
@@ -30,18 +30,18 @@ function Quiz() {
     }
   return (
     <div>
-        <p className="heading-txt">Quiz APP</p>
+        <p className="heading-txt">Science1 APP</p>
         <div className="container">
             {showResult ? (
-                <QuizResult score={score} totalScore={QuizData.length} tryAgain={resetAll}/>
+                <QuizResult score={score} totalScore={Sciencedata1.length} tryAgain={resetAll}/>
             ):(
             <>
             <div className="question">
                 <span id="question-number">{currentQuestion+1}. </span>
-                <span id="question-txt">{QuizData[currentQuestion].question}</span>
+                <span id="question-txt">{Sciencedata1[currentQuestion].question}</span>
             </div>
             <div className="option-container">
-                {QuizData[currentQuestion].options.map((option,i)=>{
+                {Sciencedata1[currentQuestion].options.map((option,i)=>{
                     return(
                         <button 
                         style={{ variant: "contained"}}
@@ -64,4 +64,4 @@ function Quiz() {
   )
 }
 
-export default Quiz
+export default Science1;

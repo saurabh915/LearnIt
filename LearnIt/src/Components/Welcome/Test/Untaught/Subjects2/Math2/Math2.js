@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { QuizData } from '../CurrentData/CurrentData.js'
-import QuizResult from './QuizResult';
-function Quiz() {
+import { Mathdata2 } from './Mathdata2';
+import QuizResult from '../QuizResult1';
+import  '../Quiz1.css';
+function Math2() {
     const [currentQuestion,setCurrentQuestion]=useState(0);
     const [score,setScore] = useState(0);
     const [clickedOption,setClickedOption]=useState(0);
@@ -9,7 +10,7 @@ function Quiz() {
     
     const changeQuestion = ()=>{
         updateScore();
-        if(currentQuestion< QuizData.length-1){
+        if(currentQuestion< Mathdata2.length-1){
             setCurrentQuestion(currentQuestion+1);
             setClickedOption(0);
         }else{
@@ -17,7 +18,7 @@ function Quiz() {
         }
     }
     const updateScore=()=>{
-        if(clickedOption===QuizData[currentQuestion].answer){
+        if(clickedOption===Mathdata2[currentQuestion].answer){
             setScore(score+1);
         }
     }
@@ -29,20 +30,21 @@ function Quiz() {
     }
   return (
     <div>
-        <p className="heading-txt">Quiz APP</p>
+        <p className="heading-txt">Math1 APP</p>
         <div className="container">
             {showResult ? (
-                <QuizResult score={score} totalScore={QuizData.length} tryAgain={resetAll}/>
+                <QuizResult score={score} totalScore={Mathdata2.length} tryAgain={resetAll}/>
             ):(
             <>
             <div className="question">
                 <span id="question-number">{currentQuestion+1}. </span>
-                <span id="question-txt">{QuizData[currentQuestion].question}</span>
+                <span id="question-txt">{Mathdata2[currentQuestion].question}</span>
             </div>
             <div className="option-container">
-                {QuizData[currentQuestion].options.map((option,i)=>{
+                {Mathdata2[currentQuestion].options.map((option,i)=>{
                     return(
                         <button 
+                        style={{ variant: "contained"}}
                         // className="option-btn"
                         className={`option-btn ${
                             clickedOption == i+1?"checked":null
@@ -62,4 +64,4 @@ function Quiz() {
   )
 }
 
-export default Quiz
+export default Math2;
