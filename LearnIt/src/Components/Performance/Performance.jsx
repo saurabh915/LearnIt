@@ -1,32 +1,68 @@
 import React, { useEffect, useRef, useState } from "react";
+import {useNavigate} from 'react-router-dom'
 import Chart from "chart.js/auto";
 import "./Performance.css";
 import axios from "axios";
 import { getstudentdata } from "../../service/quizapi";
 const Performance = () => {
+
   const chartRef1 = useRef(null);
   const chartRef2 = useRef(null);
   const chartInstance1 = useRef(null);
   const chartInstance2 = useRef(null);
-  const [marks, setmarks] = useState(0);
+  const [Pmarks, setPmarks] = useState(0);
   const [subject, setsubject] = useState({});
   const [performance, setperformance] = useState("");
+  const [cMarks, setcMarks] = useState([]);
+  const [cMark, setcMark] = useState(0);
+  const [marks, setmarks] = useState(0);
+  const navigate = useNavigate();
+  const navigatetohome =()=>{
 
+navigate('/welcome')
+  }
+  const navigatetotest =()=>{
+
+navigate('/CurrentScreen2')
+  }
+const loaddata = ()=>{
+  setmarks(0);
+}
   useEffect( () => {
     const email = localStorage.getItem("email");
     let averageMarks =  getstudentdata(email);
   averageMarks.then((data)=>{
-    setmarks(data[0]);
+    console.log(data);
+    setPmarks(data[0]);
     setsubject(data[1]);
+    if(localStorage.getItem("Science") >= 0){
+      let m = parseInt(localStorage.getItem("Science"));
+      setcMark(m);
+      setcMarks( {"Science": m})
+    }
+    else{
+      if(localStorage.getItem("Maths") >= 0){
+      let  m = parseInt(localStorage.getItem("Maths"));
+      setcMark(m + cMark)
+        setcMarks( {"Maths":cMark});
+      }
+      else{
+        if(localStorage.getItem("Social") >= 0){
+          let  m = parseInt(localStorage.getItem("Social"));
+          setcMark(m + cMark)
+            setcMarks( {"Social":cMark});
+        }
+      }
+    }
   })
 
- console.log(subject["science"]);
 
-    const currentMarks = 50;
+
+   console.log(cMark);
     const dynamicMarks = 45;
 
     const result =
-      0.4 * marks + 0.25 * dynamicMarks + 0.35 * currentMarks;
+      0.4 * parseInt(Pmarks) + 0.25 * dynamicMarks + 0.35 * cMark;
     setmarks(result);
     if (result < 50) {
       setperformance("Slow Learner");
@@ -56,10 +92,10 @@ const Performance = () => {
 
     // Data for the second chart
     const data2 = {
-      labels: ["Science-A", "Physics", "Maths"],
+      labels: ["Science", "Maths","Social"],
       datasets: [
         {
-          data: [10, 40, 50],
+          data:  [ parseInt(localStorage.getItem("Science")), parseInt(localStorage.getItem("Maths")), parseInt(localStorage.getItem("Social"))],
           backgroundColor: ["orange", "purple", "pink"],
         },
       ],
@@ -78,11 +114,12 @@ const Performance = () => {
       type: "bar",
       data: data2,
     });
-  }, []);
+  }, [marks]);
 
   return (
-    <div>
+    <div className="Performance">
       <h2>Test Performance</h2>
+      <button onClick={()=>{loaddata()}}className="btn btn-primary">Load Data</button>
       <div className="chart-container">
       
         <h1>Past Test Performance</h1>
@@ -95,10 +132,17 @@ const Performance = () => {
         <canvas style={{ border: "2px solid black" }} ref={chartRef2}></canvas>
       </div>
       <div>
-        <h1>student catagorization</h1>
-        <div>{marks}</div>
+        <h1>student categorization</h1>
+        <div>{parseInt(marks)}</div>
         <div>Here is your Category</div>
         <div>{performance}</div>
+        
+      </div>
+      <br />
+      <div className="foot">
+
+<div onClick={()=>{ navigatetotest()}} className="btn btn-primary">Give Your Next Test</div>
+      <div onClick={()=>{ navigatetohome()}} className="btn btn-primary">Home Page</div>
       </div>
     </div>
   );

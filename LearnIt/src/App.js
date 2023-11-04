@@ -20,6 +20,8 @@ import HomePage from './Components/Home.jsx';
 import TestScreen from './Components/Welcome/Test/TestScreen.js';
 import CurrentScreen1 from './Components/Welcome/Test/CurrentTest/CurrentScreen1.js';
 // import Quiz1 from './Components/Welcome/Test/CurrentTest/Quiz1.js';
+import Test from './Components/Welcome/Test/Test.jsx';
+// import Subjects from './Components/Welcome/Test/Untaught/';
 
 import Social1 from './Components/Welcome/Test/CurrentTest/Subjects1/Social1/Social1.js';
 import Math1 from './Components/Welcome/Test/CurrentTest/Subjects1/Math1/Math1.js';
@@ -61,6 +63,7 @@ function App() {
           <Route exact path="/Socialp" element={<Socialp/>} />
           <Route exact path="/Mathp" element={<Mathp/>}/>
           <Route exact path="/Sciencep" element={<Sciencep/>}/>
+          <Route exact path="/test" element={<Test/>}/>
 
           {/* <----------------- Teacher Section ------------> */}
 
