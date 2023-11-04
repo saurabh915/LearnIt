@@ -6,8 +6,11 @@ function Welcome() {
   function viewPerformance() {
     navigate('/performance')
   }
-  function GiveTest() {
-    navigate('/test')
+  // function GiveTest() {
+  //   navigate('/test')
+  // }
+  function GiveTest(){
+    navigate('/TestScreen')
   }
   return (
     <>
