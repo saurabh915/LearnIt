@@ -20,9 +20,9 @@ import HomePage from './Components/Home.jsx';
 import TestScreen from './Components/Welcome/Test/TestScreen.js';
 import CurrentScreen1 from './Components/Welcome/Test/CurrentTest/CurrentScreen1.js';
 // import Quiz1 from './Components/Welcome/Test/CurrentTest/Quiz1.js';
-import Test from './Components/Welcome/Test/Test.jsx';
-// import Subjects from './Components/Welcome/Test/Untaught/';
-
+import Test from './Components/Welcome/Test/CurrentTest/Test.jsx';
+// import Subjects from './Components/Welcome/Test/Untaught/';1
+import Subjects from './Components/Welcome/Test/CurrentTest/Subjects1.jsx'
 import Social1 from './Components/Welcome/Test/CurrentTest/Subjects1/Social1/Social1.js';
 import Math1 from './Components/Welcome/Test/CurrentTest/Subjects1/Math1/Math1.js';
 import Science1 from './Components/Welcome/Test/CurrentTest/Subjects1/Science1/Science1.js';
@@ -51,7 +51,7 @@ function App() {
           <Route exact path="/ParentLogin" element={<Form />} />
           <Route exact path="/TeacherLogin" element={<Form />} />
           <Route exact path="/Welcome" element={<Welcome />} />
-          <Route exact path="/TestScreen" element={<TestScreen />} />
+          {/* <Route exact path="/TestScreen" element={<TestScreen />} /> */}
           <Route exact path="/CurrentScreen1" element={<CurrentScreen1 />} />
           <Route exact path="/Social1" element={<Social1/>}/>
           <Route exact path="/Math1" element={<Math1/>}/>
@@ -64,7 +64,7 @@ function App() {
           <Route exact path="/Mathp" element={<Mathp/>}/>
           <Route exact path="/Sciencep" element={<Sciencep/>}/>
           <Route exact path="/test" element={<Test/>}/>
-
+<Route exact path = "/subjects" element = {<Subjects/>}/>
           {/* <----------------- Teacher Section ------------> */}
 
           <Route exact path="/main" element={<Main />} />

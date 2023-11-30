@@ -8,10 +8,10 @@
     height: 100vh;
     background: url('https://c4.wallpaperflare.com/wallpaper/623/279/820/scripture-write-wallpaper-preview.jpg');
     background-size: cover;
+    background-position: center;
     position: relative;
     top: -59px;
-    z-index: -1;
-    background-position: center;
+    z-index: 5;
 }
 
 /* Style for the left section (Current Syllabus Test) */
@@ -27,7 +27,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-left: 50px;
+
     text-align: center;
     height: 65%;
     width: 30%;

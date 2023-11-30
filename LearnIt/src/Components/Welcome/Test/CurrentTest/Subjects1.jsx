@@ -13,7 +13,7 @@ function Subjects() {
       .catch((error) => console.error('Error fetching subjects:', error));
   }, []);
   const giveTest = (subject) => {
-    navigate(`/${subject}quiz`)
+    navigate(`/${subject}1`)
   }
   return (
     <>

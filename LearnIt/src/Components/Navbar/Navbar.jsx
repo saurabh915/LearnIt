@@ -1,5 +1,6 @@
 import React from 'react';
 import './Navbar.css'
+
 const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light  ">
@@ -61,7 +62,7 @@ const Navbar = () => {
               </ul>
             </li>
             <li className="nav-item">
-              <a className="nav-link disabled">Log out</a>
+              <a className="nav-link disabled" style={{color:"white"}}>Log out</a>
             </li>
           </ul>
          

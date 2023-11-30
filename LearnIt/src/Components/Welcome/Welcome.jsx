@@ -10,7 +10,7 @@ function Welcome() {
   //   navigate('/test')
   // }
   function GiveTest(){
-    navigate('/TestScreen')
+    navigate('/Test')
   }
   return (
     <>
