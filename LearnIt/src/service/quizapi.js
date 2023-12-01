@@ -27,3 +27,40 @@ console.log("trying to make request");
         console.log("error while adduser",error.message);
     }
 }
+
+
+
+
+
+
+
+
+export const postcurrentTestR = async(credentials, cResult)=>{
+    try {
+console.log("trying to make request");
+        const response = await fetch(`http://localhost:8000/cResult`, {
+            method: 'PUT',
+            headers: {
+              "Content-Type": "application/json",
+             
+            },
+            body: JSON.stringify(
+
+              { 
+                email: credentials,
+                cResult: cResult
+           
+              },
+
+              )
+          });
+          const averageMarks = await response.json();
+   
+          return averageMarks;
+       
+
+
+    } catch (error) {
+        console.log("error while addCmarks",error.message);
+    }
+}

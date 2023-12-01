@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Mathdata1 } from './Mathdata1';
 import QuizResult from '../QuizResult1';
 import  '../Quiz1.css';
+import {postcurrentTestR} from '../../../../../../service/quizapi'
 function Math1() {
     const [currentQuestion,setCurrentQuestion]=useState(0);
     const [score,setScore] = useState(0);
@@ -15,6 +16,9 @@ function Math1() {
             setClickedOption(0);
         }else{
             setShowResult(true)
+             let email = localStorage.getItem("email")
+             const cResult = {maths: score}
+             postcurrentTestR(email , cResult);
         }
     }
     const updateScore=()=>{

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Socialdata1 } from './Socialdata1';
 import QuizResult from '../QuizResult1';
 import  '../Quiz1.css';
+import {postcurrentTestR} from '../../../../../../service/quizapi'
 function Social1() {
     const [currentQuestion,setCurrentQuestion]=useState(0);
     const [score,setScore] = useState(0);
@@ -15,6 +16,9 @@ function Social1() {
             setClickedOption(0);
         }else{
             setShowResult(true)
+            let email = localStorage.getItem("email")
+            const cResult = {social: score}
+            postcurrentTestR(email , cResult);
         }
     }
     const updateScore=()=>{

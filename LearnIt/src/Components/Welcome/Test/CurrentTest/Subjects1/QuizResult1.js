@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import {  useParams } from 'react-router-dom';
 import Performance from "../../../../Performance/Performance";
-
+import {postcurrentTestR} from '../../../../../service/quizapi'
 import { useNavigate } from 'react-router-dom';
 function QuizResult1(props) {
 
@@ -14,17 +14,18 @@ function QuizResult1(props) {
  const [performance, setPerformance] = useState(true);
  const navigate = useNavigate();
  const showPerformance = () => {
-  const currentPath = window.location.pathname;
-  console.log(currentPath);
-    if (currentPath == "/Science1") {
-      localStorage.setItem("Science",props.score)
+  // let email = localStorage.getItem(email)
+  // const currentPath = window.location.pathname;
+  // console.log(currentPath);
+  //   if (currentPath == "/Science1") {
+  //     postcurrentTestR(email , {science: props.score});
      
-    } else if (currentPath == "/Math1") {
-      localStorage.setItem("Maths",props.score)
-    } else if (currentPath == "/Social1") {
-      localStorage.setItem("Social",props.score)
-    }
-navigate("/performance")
+  //   } else if (currentPath == "/Math1") {
+  //     postcurrentTestR(email , {maths: props.score});
+  //   } else if (currentPath == "/Social1") {
+  //     postcurrentTestR(email , {social: props.score});
+  //   }
+navigate("/subjects")
   }
 
   // return (
@@ -54,7 +55,7 @@ navigate("/performance")
         Your Score: {props.score}<br />
            Total Score: {props.totalScore}
          </div>
-        <button id="next-button" onClick={showPerformance}>Show Performance</button></>);
+        <button id="next-button" onClick={showPerformance}>Next Subject Test</button></>);
     
   
  
