@@ -16,18 +16,31 @@ function Subjects() {
     navigate(`/${subject}quiz`)
   }
   return (
-    <>
-      <div>
-        <h2>Subjects</h2>
-        <div className="button-container border  ">
-          {subjects.map((subject, index) => (
-            <button onClick={() => { giveTest(subject) }} className="btn m-2 btn-primary " key={index}>{subject}</button>
-          ))}
-        </div>
+    <section className="main">
+      <div className="main-top">
+        <h1>Subject</h1>
       </div>
-
-    </>
-  )
+      <section className="main-subjects">
+        <div className="card">
+          <h3>Science</h3>
+          <p>Join Over 1 million Students.</p>
+          <button onClick={() => giveTest("Science")}>Get Started</button>
+        </div>
+        <div className="card">
+          <h3>Mathematics</h3>
+          <p>Join Over 3 million Students.</p>
+          <button onClick={() => giveTest("Maths")}>Get Started</button>
+        </div>
+        <div className="card">
+          <h3>Social Science</h3>
+          <p>Join Over 2 million Students.</p>
+          <button onClick={() => giveTest("Social")}>Get Started</button>
+        </div>
+        
+      
+      </section>
+    </section>
+  );
 }
 
 export default Subjects

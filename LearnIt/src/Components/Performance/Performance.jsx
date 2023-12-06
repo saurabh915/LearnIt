@@ -81,10 +81,10 @@ const loaddata = ()=>{
 
     // Data for the first chart
     const data1 = {
-      labels: ["Science", "Maths", "English"],
+      labels: ["Science", "Maths", "Social"],
       datasets: [
         {
-          data: [subject["science"], subject["maths"],subject["english"]],
+          data: [subject["Science"], subject["Maths"],subject["Social"]],
           backgroundColor: ["red", "blue", "green"],
         },
       ],
@@ -120,24 +120,38 @@ const loaddata = ()=>{
     <div className="Performance">
       <h2>Test Performance</h2>
       <button onClick={()=>{loaddata()}}className="btn btn-primary">Load Data</button>
-      <div className="chart-container">
-      
-        <h1>Past Test Performance</h1>
-        <canvas
-          style={{ border: "2px solid black", margin: "10px" }}
+      <div className="chart-content">
+        <div>
+          <h1>Past Test Performance</h1>
+        </div>
+        <div>
+          <h1>Current Test Performance</h1>
+        </div>
+      </div>
+      <div  className="chart-container">
+         
+         
+            <canvas
+          style={{ border: "3px solid black", margin: "10px",height: "100px",width:"200px" }}
           ref={chartRef1}
         >
-        </canvas>
-        <h1>Current Test Performance</h1>
-        <canvas style={{ border: "2px solid black" }} ref={chartRef2}></canvas>
-      </div>
-      <div>
-        <h1>student categorization</h1>
-        <div>{parseInt(marks)}</div>
+          </canvas>
+          
+        
+        <canvas style={{ border: "3px solid black",margin:"5px",height: "290px",width:"200px"}} ref={chartRef2}></canvas>
+        
+          </div>
+  
+     
+      
+        <h1>Student Categorization </h1>
+      <div className="category" style={{justifyContent:"center"}}>
+        <div>Your Marks:{parseInt(marks)}</div>
         <div>Here is your Category</div>
         <div>{performance}</div>
         
       </div>
+     
       <br />
       <div className="foot">
 
@@ -149,3 +163,4 @@ const loaddata = ()=>{
 };
 
 export default Performance;
+
