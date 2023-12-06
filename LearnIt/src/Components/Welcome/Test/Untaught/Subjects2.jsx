@@ -18,7 +18,7 @@ function Subjects() {
   return (
     <>
       <div>
-        <h2>Subjects</h2>
+        <h2> Dynamic Test Subjects</h2>
         <div className="button-container border  ">
           {subjects.map((subject, index) => (
             <button onClick={() => { giveTest(subject) }} className="btn m-2 btn-primary " key={index}>{subject}</button>

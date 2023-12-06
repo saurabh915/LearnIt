@@ -135,7 +135,33 @@ export const Usubjects = async (req, res) => {
         if (user) {
             // User exists in the database
             let subjects = user[0].CMarks;
-          
+          console.log("subjects of Usubjects");
+          console.log(subjects);
+            return res.status(200).json({ message: "User validated successfully", subjects});
+        } else {
+            // User does not exist in the database
+            return res.status(401).json({ message: "Invalid email or password" });
+        }
+    } catch (error) {
+        return res.status(500).json(error);
+    }
+};
+
+
+
+export const Dusubjects = async (req, res) => {
+    try {
+
+        const { email } = req.body;
+        // Validate if the email and password exist in your MongoDB database
+        const user = await StudentDomain.find({ email });
+   
+        if (user) {
+            // User exists in the database
+            console.log(user);
+            let subjects = user[0].DMarks;
+            console.log("subjects are");
+          console.log(subjects);
             return res.status(200).json({ message: "User validated successfully", subjects});
         } else {
             // User does not exist in the database

@@ -54,7 +54,7 @@ function App() {
           {/* <Route exact path="/TestScreen" element={<TestScreen />} /> */}
           <Route exact path="/CurrentScreen1" element={<CurrentScreen1 />} />
           <Route exact path="/Social1" element={<Social1/>}/>
-          <Route exact path="/Math1" element={<Math1/>}/>
+          <Route exact path="/Maths1" element={<Math1/>}/>
           <Route exact path="/Science1" element={<Science1 />} />
           <Route exact path="/CurrentScreen2" element={<CurrentScreen2/>} />
           <Route exact path="/Social2" element={<Social2/>}/>
