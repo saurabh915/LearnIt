@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import {  useParams } from 'react-router-dom';
 import Performance from "../../../../Performance/Performance";
-import {postcurrentTestR} from '../../../../../service/quizapi'
+import {postDynamicTestR, postcurrentTestR} from '../../../../../service/quizapi'
 import { useNavigate } from 'react-router-dom';
 function QuizResult1(props) {
 
@@ -14,16 +14,16 @@ function QuizResult1(props) {
  const [performance, setPerformance] = useState(true);
  const navigate = useNavigate();
  const showPerformance = () => {
-  let email = localStorage.getItem(email)
+  let email = localStorage.getItem("email")
   const currentPath = window.location.pathname;
   console.log(currentPath);
-    if (currentPath == "/Science1") {
-      postcurrentTestR(email , {science: props.score});
+    if (currentPath == "/Science2") {
+      postDynamicTestR(email , {science: props.score});
      
-    } else if (currentPath == "/Math1") {
-      postcurrentTestR(email , {maths: props.score});
-    } else if (currentPath == "/Social1") {
-      postcurrentTestR(email , {social: props.score});
+    } else if (currentPath == "/Maths2") {
+      postDynamicTestR(email , {maths: props.score});
+    } else if (currentPath == "/Social2") {
+      postDynamicTestR(email , {social: props.score});
     }
 navigate("/subjects")
   }

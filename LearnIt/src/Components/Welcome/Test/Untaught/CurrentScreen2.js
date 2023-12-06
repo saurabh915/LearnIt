@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import Performance from '../../../Performance/Performance';
 function CurrentScreen2() {
   const [subjects, setSubjects] = useState(["Science",'Maths', "Social"]);
   const [Usubjects, setUSubjects] = useState([]);
@@ -26,7 +27,7 @@ function CurrentScreen2() {
     
 
     
-    fetch('http://localhost:8000/subjects',requestOptions)
+    fetch('http://localhost:8000/dsubjects',requestOptions)
     .then((response) => response.json())
     .then((data) => 
     {
@@ -48,20 +49,46 @@ setFSubjects(newArray);
 
 
 
-  }, []);
+  });
+
+  
+  const navigatePerformance= ()=>{
+    navigate('/performance');
+      }
+      const navigateProfile= ()=>{
+    navigate('/welcome');
+      }
   const giveTest = (subject) => {
     navigate(`/${subject}p`)
   }
+
+
+  
   return (
     <>
-      <div>
-        <h2>Subjects</h2>
-        <div className="button-container border  ">
-          {subjects.map((subject, index) => (
-            <button onClick={() => { giveTest(subject) }} className="btn m-2 btn-primary " key={index}>{subject}</button>
-          ))}
-        </div>
-      </div>
+        <div>
+
+{ 
+Fsubjects.length !== 0?
+<>
+<h2>Dynamic Test Subjects</h2>
+<div className="button-container border  ">
+  {subjects.map((subject, index) => (
+    !Usubjects.includes(subject.toLocaleLowerCase()) ? <button onClick={() => {  giveTest(subject) }} className="btn m-2 btn-primary " key={index}>{subject}</button>:<button onClick={() => { giveTest(subject) }} className="btn m-2 btn-primary disabled" key={index}>{subject}</button>
+    ))}
+</div> </>:
+   <>
+
+
+<div className='display-4'>Congraulations You have given Your All Dynamic Tests</div>
+
+<button className=' btn m-2 btn-primary' onClick={navigateProfile}>GO TO PROFILE </button>
+<button className='btn m-2 btn-primary' onClick={navigatePerformance}>GO TO PERFORMANCE </button>
+
+</>
+}
+
+</div>
 
     </>
   )

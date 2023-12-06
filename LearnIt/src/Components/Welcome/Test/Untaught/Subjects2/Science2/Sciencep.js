@@ -11,7 +11,7 @@ function Socialp() {
           </p>
       </div>
 
-      <Link to="/Social2">
+      <Link to="/Science2">
         <button id="startQuizButton">Start Quiz</button>
       </Link>
     </div>

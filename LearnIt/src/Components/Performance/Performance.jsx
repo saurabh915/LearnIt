@@ -10,13 +10,19 @@ const Performance = () => {
   const chartRef2 = useRef(null);
   const chartInstance1 = useRef(null);
   const chartInstance2 = useRef(null);
-  const [Pmarks, setPmarks] = useState(0);
-  const [subject, setsubject] = useState({});
+const [academicMarks, setAcademicMarks] = useState([]);
+const [fresh, setRefresh] = useState(false);
+const [currentMarks, setCurrentMarks] = useState([])
+const [dynamicMarks, setDynamicMarks] = useState([])
+const [academiSubjects, setAcademicSubjects] = useState([]);
+const [currentSubjects, setCurrentSubjects] = useState([])
+const [dynamicSubjects, setDynamicSubjects] = useState([])
   const [performance, setperformance] = useState("");
-  const [cMarks, setcMarks] = useState([]);
-  const [cMark, setcMark] = useState(0);
-  const [marks, setmarks] = useState(0);
+
   const navigate = useNavigate();
+
+
+
   const navigatetohome =()=>{
 
 navigate('/welcome')
@@ -26,95 +32,116 @@ navigate('/welcome')
 navigate('/CurrentScreen2')
   }
 const loaddata = ()=>{
-  setmarks(0);
+  setRefresh(!fresh);
+  console.log("load data called");
 }
   useEffect( () => {
     const email = localStorage.getItem("email");
-    let averageMarks =  getstudentdata(email);
-  averageMarks.then((data)=>{
-    console.log(data);
-    setPmarks(data[0]);
-    setsubject(data[1]);
-    if(localStorage.getItem("Science") >= 0){
-      let m = parseInt(localStorage.getItem("Science"));
-      setcMark(m);
-      setcMarks( {"Science": m})
+    let Marks =  getstudentdata(email);
+console.log(Marks);
+Marks.then((data)=>{
+  console.log("data2 is given ");
+  console.log(data[2]);
+  let AMarks = [];
+  let CMarks = [];
+  let DMarks = [];
+  
+  let ASubjects= [];
+  let CSubjects = [];
+  let DSubjects = [];
+AMarks = Object.values(data[1]);
+CMarks = Object.values(data[2]);
+DMarks = Object.values(data[3]);
+
+ASubjects = Object.keys(data[1]);
+CSubjects = Object.keys(data[2]);
+DSubjects = Object.keys(data[3]);
+
+
+setAcademicMarks(AMarks);
+setCurrentMarks(CMarks);
+setDynamicMarks(DMarks);
+
+
+setAcademicSubjects(ASubjects);
+setCurrentSubjects(CSubjects);
+setDynamicSubjects(DSubjects);
+console.log("all work is");
+  console.log(academicMarks);
+  console.log(currentMarks);
+  console.log(dynamicMarks);
+})
+
+
+   },[]);
+  
+useEffect(() => {
+  if (chartInstance1.current) {
+    chartInstance1.current.destroy();
+  }
+  if (chartInstance2.current) {
+    chartInstance2.current.destroy();
+  }
+
+  const data1 = {
+    labels: currentSubjects,
+    datasets: [
+      {
+        data: currentMarks,
+        backgroundColor: ["red", "blue", "green"],
+      },
+    ],
+  };
+
+  // Data for the second chart
+  const data2 = {
+    labels: dynamicSubjects,
+    datasets: [
+      {
+        data:  dynamicMarks,
+        backgroundColor: ["orange", "purple", "pink"],
+      },
+    ],
+  };
+
+  // Chart 1
+  const ctx1 = chartRef1.current.getContext("2d");
+  chartInstance1.current = new Chart(ctx1, {
+    type: "pie",
+    data: data1,
+  });
+
+  // Chart 2
+  const ctx2 = chartRef2.current.getContext("2d");
+  chartInstance2.current = new Chart(ctx2, {
+    type: "bar",
+    data: data2,
+  });
+
+  const Asum = academicMarks.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+  console.log("sum of all is"+ " " + Asum)
+  const Csum = currentMarks.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+  console.log("sum of all is"+ " " + Csum)
+  const Dsum = currentMarks.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+  console.log("sum of all is"+ " " + Dsum)
+
+  let total = Asum  + ( Csum * 10) + (Dsum * 10);
+  total = Math.round(total /10);
+  if(total >70)
+  {
+    setperformance("Fast Learner")
+  } 
+  else{
+    if(total > 50){
+      setperformance("Average Learner")
     }
     else{
-      if(localStorage.getItem("Maths") >= 0){
-      let  m = parseInt(localStorage.getItem("Maths"));
-      setcMark(m + cMark)
-        setcMarks( {"Maths":cMark});
-      }
-      else{
-        if(localStorage.getItem("Social") >= 0){
-          let  m = parseInt(localStorage.getItem("Social"));
-          setcMark(m + cMark)
-            setcMarks( {"Social":cMark});
-        }
-      }
+      setperformance("Slow Learner")
     }
-  })
+  } 
+}, [fresh])
 
-
-
-   console.log(cMark);
-    const dynamicMarks = 45;
-
-    const result =
-      0.4 * parseInt(Pmarks) + 0.25 * dynamicMarks + 0.35 * cMark;
-    setmarks(result);
-    if (result < 50) {
-      setperformance("Slow Learner");
-    } else if (result >= 50 && result < 70) {
-      setperformance("Average Learner");
-    } else {
-      setperformance("Advance Learner");
-    }
-
-    if (chartInstance1.current) {
-      chartInstance1.current.destroy();
-    }
-    if (chartInstance2.current) {
-      chartInstance2.current.destroy();
-    }
-
-    // Data for the first chart
-    const data1 = {
-      labels: ["Science", "Maths", "English"],
-      datasets: [
-        {
-          data: [subject["science"], subject["maths"],subject["english"]],
-          backgroundColor: ["red", "blue", "green"],
-        },
-      ],
-    };
-
-    // Data for the second chart
-    const data2 = {
-      labels: ["Science", "Maths","Social"],
-      datasets: [
-        {
-          data:  [ parseInt(localStorage.getItem("Science")), parseInt(localStorage.getItem("Maths")), parseInt(localStorage.getItem("Social"))],
-          backgroundColor: ["orange", "purple", "pink"],
-        },
-      ],
-    };
-
-    // Chart 1
-    const ctx1 = chartRef1.current.getContext("2d");
-    chartInstance1.current = new Chart(ctx1, {
-      type: "pie",
-      data: data1,
-    });
-
-    // Chart 2
-    const ctx2 = chartRef2.current.getContext("2d");
-    chartInstance2.current = new Chart(ctx2, {
-      type: "bar",
-      data: data2,
-    });
-  }, [marks]);
+ 
 
   return (
     <div className="Performance">
@@ -122,18 +149,18 @@ const loaddata = ()=>{
       <button onClick={()=>{loaddata()}}className="btn btn-primary">Load Data</button>
       <div className="chart-container">
       
-        <h1>Past Test Performance</h1>
+        <h1>Current Test Performance</h1>
         <canvas
           style={{ border: "2px solid black", margin: "10px" }}
           ref={chartRef1}
         >
         </canvas>
-        <h1>Current Test Performance</h1>
+        <h1>Dynamic Test Performance</h1>
         <canvas style={{ border: "2px solid black" }} ref={chartRef2}></canvas>
       </div>
       <div>
         <h1>student categorization</h1>
-        <div>{parseInt(marks)}</div>
+        <div>{parseInt(academicMarks)}</div>
         <div>Here is your Category</div>
         <div>{performance}</div>
         

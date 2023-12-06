@@ -24,7 +24,7 @@ export const studentdata = async (req, res) => {
         const { email } = req.body;
         // Validate if the email and password exist in your MongoDB database
         const user = await StudentDomain.find({ email });
-        console.log(user.AverageMarks);
+        console.log(user);
         if (user) {
             // User exists in the database
             return res.status(200).json({ message: "User validated successfully", user });
@@ -44,7 +44,7 @@ export const cResult = async (req, res) => {
         const { email , cResult} = req.body;
         // Validate if the email and password exist in your MongoDB database
         const user = await StudentDomain.find({ email });
-        console.log("cresult is "+ cResult.maths);
+        console.log("cresult is "+ cResult.science);
 
 
 
@@ -57,7 +57,7 @@ export const cResult = async (req, res) => {
         the filter */
         const options = { upsert: false };
         // Specify the update to set a value for the plot field
-        if (cResult.science) {
+        if (cResult.science !== null) {
               var updateDoc = {
           $set: {
             "CMarks.science" : cResult.science
@@ -65,21 +65,21 @@ export const cResult = async (req, res) => {
         };
         }
         
-            if (cResult.maths) {
+            if (cResult.maths !== null) {
                 var updateDoc = {
                     $set: {
                       "CMarks.maths" : cResult.maths
                     },
                   };
             }
-            if (cResult.hindi) {
+            if (cResult.hindi !== null) {
                 var updateDoc = {
                     $set: {
                       "CMarks.hindi" : cResult.hindi
                     },
                   };
             }
-            if (cResult.english) {
+            if (cResult.english !== null) {
                 var updateDoc = {
                     $set: {
                       "CMarks.english" : cResult.english
@@ -87,10 +87,97 @@ export const cResult = async (req, res) => {
                   };
             }
 
-            if (cResult.social) {
+            if (cResult.social !== null) {
                 var updateDoc = {
                     $set: {
                       "CMarks.social" : cResult.social
+                    },
+                  };
+            }
+        
+      
+        // Update the first document that matches the filter
+        
+        
+
+        
+        
+        
+        
+        
+        
+        
+        
+        if (user) {
+            // mark = await StudentDomain.findByIdAndUpdate(user._id, { $set: {"CMarks.science":cResult.science}})
+            // User exists in the database
+            
+            const mark = await StudentDomain.findOneAndUpdate(filter, updateDoc, options);
+            
+            return res.status(200).json({ message: "Updated successfully", mark });
+        } else {
+            // User does not exist in the database
+            return res.status(401).json({ message: "Update Unsuccessful" });
+        }
+    } catch (error) {
+        return res.status(500).json(error);
+    }
+};
+
+
+export const dResult = async (req, res) => {
+    try {
+
+        const { email , dResult} = req.body;
+        // Validate if the email and password exist in your MongoDB database
+        const user = await StudentDomain.find({ email });
+        console.log("cresult is "+ dResult.maths);
+
+
+
+
+
+
+
+        const filter = { email:email };
+        /* Set the upsert option to insert a document if no documents match
+        the filter */
+        const options = { upsert: false };
+        // Specify the update to set a value for the plot field
+        if (dResult.science) {
+              var updateDoc = {
+          $set: {
+            "DMarks.science" : dResult.science
+          },
+        };
+        }
+        
+            if (dResult.maths !== null) {
+                var updateDoc = {
+                    $set: {
+                      "DMarks.maths" : dResult.maths
+                    },
+                  };
+            }
+            if (dResult.hindi !== null) {
+                var updateDoc = {
+                    $set: {
+                      "DMarks.hindi" : dResult.hindi
+                    },
+                  };
+            }
+            if (dResult.english !== null) {
+                var updateDoc = {
+                    $set: {
+                      "DMarks.english" : dResult.english
+                    },
+                  };
+            }
+
+            if (dResult.social !== null) {
+                var updateDoc = {
+                    $set: {
+                      "DMarks.social" : dResult.social
                     },
                   };
             }
@@ -160,7 +247,7 @@ export const Dusubjects = async (req, res) => {
             // User exists in the database
             console.log(user);
             let subjects = user[0].DMarks;
-            console.log("subjects are");
+            console.log("dynamic subjects are");
           console.log(subjects);
             return res.status(200).json({ message: "User validated successfully", subjects});
         } else {

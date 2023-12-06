@@ -3,11 +3,12 @@ import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import Subjects2 from '../Untaught/Subjects2'
 import CurrentScreen2 from '../Untaught/CurrentScreen2';
+
 function Subjects() {
-  const [subjects, setSubjects] = useState(["Science",'Maths', "Social", "Hindi", "English"]);
+  const [subjects, setSubjects] = useState(["science",'maths', "social"]);
   const [Usubjects, setUSubjects] = useState([]);
   const [Fsubjects, setFSubjects] = useState([]);
-const [dynamic , setDynamic] =useState(false);
+const [dynamic , setDynamic] =useState(true);
   const navigate = useNavigate();
   const allowDTest = ()=>{
 
@@ -42,11 +43,11 @@ return true;
       arr =   Object.keys(data.subjects) 
       console.log("unactive subjects are in frontend");
       setUSubjects(arr)
+      console.log(data.subjects);
       console.log(Usubjects);
-const newArray = subjects.filter(element => !Usubjects.includes(element.toLocaleLowerCase()));
-console.log("new array is"+ newArray);
-setFSubjects(newArray);
-console.log("fsubjects length is" + Fsubjects.length);
+setFSubjects(subjects.filter(element => !Usubjects.includes(element.toLocaleLowerCase())));
+
+console.log("fsubjects length is" + Fsubjects);
 if (Fsubjects.length == 0) {
   console.log("length is zero");
   setDynamic(false)
@@ -58,16 +59,31 @@ if (Fsubjects.length == 0) {
 
 
      
-  },[]);
+  });
+
+  const checkDynamic = ()=>{
+    if (Fsubjects.length == 0) {
+      console.log("length is zero");
+      
+      return true;
+    }
+  }
   const giveTest = (subject) => {
     navigate(`/${subject.replace(/\s/g, "")}1`)
+  }
+
+  const navigatePerformance= ()=>{
+navigate('/performance');
+  }
+  const navigateProfile= ()=>{
+navigate('/welcome');
   }
   return (
     <>
       <div>
 
         { 
-        dynamic?
+     Fsubjects.length !== 0?
         <>
         <h2>Current Test Subjects</h2>
         <div className="button-container border  ">
@@ -75,10 +91,14 @@ if (Fsubjects.length == 0) {
             !Usubjects.includes(subject.toLocaleLowerCase()) ? <button onClick={() => {  giveTest(subject) }} className="btn m-2 btn-primary " key={index}>{subject}</button>:<button onClick={() => { giveTest(subject) }} className="btn m-2 btn-primary disabled" key={index}>{subject}</button>
             ))}
         </div> </>:
-           
-        <div>
-        <CurrentScreen2/>
+           <>
+          <div className='display-4'>Congraulations You have given Your All Current Tests</div>
+        <div >
+        <button className=' btn m-2 btn-primary' onClick={navigateProfile}>GO TO PROFILE </button>
+        <button className='btn m-2 btn-primary' onClick={navigatePerformance}>GO TO PERFORMANCE </button>
+   
         </div>
+           </>
         
         }
       
