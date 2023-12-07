@@ -68,12 +68,14 @@ if (Fsubjects.length == 0) {
   };
 
   return (
-    <>
+    <> 
+     {Fsubjects.length !== 0 ?
+            <>
       <section className="main">
         <div className="main-top">
-          {Fsubjects.length !== 0 ?
-            <>
+        
               <h1>Current Test Subjects</h1>
+              </div>
               <section className="main-subjects">
                 {subjects.map((subject, index) => (
                   !Usubjects.includes(subject.toLocaleLowerCase()) ?
@@ -89,7 +91,7 @@ if (Fsubjects.length == 0) {
                       <button className="btn m-2 btn-primary disabled" onClick={() => giveTest("Maths")}>Get Started</button>
                     </div>
                 ))}
-              </section>
+              </section></section>
             </>
             :
             <>
@@ -100,8 +102,7 @@ if (Fsubjects.length == 0) {
               </div>
             </>
           }
-        </div>
-      </section>
+     
     </>
   );
 }
