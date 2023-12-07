@@ -17,14 +17,20 @@ function Subjects() {
   }
   return (
     <>
-      <div>
+      <section className="main">
+      <div className="main-top">
         <h2> Dynamic Test Subjects</h2>
-        <div className="button-container border  ">
-          {subjects.map((subject, index) => (
-            <button onClick={() => { giveTest(subject) }} className="btn m-2 btn-primary " key={index}>{subject}</button>
-          ))}
         </div>
-      </div>
+        <section className="main-subjects">
+          {subjects.map((subject, index) => (
+           <div className="card">
+           <h3>{subject}</h3>
+           <p>Join Over 1 million Students.</p>
+           <button onClick={() => giveTest(subject)}>Get Started</button>
+         </div>
+          ))}
+        </section>
+      </section>
 
     </>
   )

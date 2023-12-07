@@ -44,7 +44,7 @@ export const cResult = async (req, res) => {
         const { email , cResult} = req.body;
         // Validate if the email and password exist in your MongoDB database
         const user = await StudentDomain.find({ email });
-        console.log("cresult is "+ cResult.science);
+        console.log("cresult is "+ user);
 
 
 
@@ -57,7 +57,7 @@ export const cResult = async (req, res) => {
         the filter */
         const options = { upsert: false };
         // Specify the update to set a value for the plot field
-        if (cResult.science !== null) {
+        if (cResult.science !== undefined) {
               var updateDoc = {
           $set: {
             "CMarks.science" : cResult.science
@@ -65,21 +65,24 @@ export const cResult = async (req, res) => {
         };
         }
         
-            if (cResult.maths !== null) {
+            if (cResult.maths !== undefined) {
+                console.log("inside maths");
                 var updateDoc = {
                     $set: {
                       "CMarks.maths" : cResult.maths
                     },
                   };
             }
-            if (cResult.hindi !== null) {
+            if (cResult.hindi !== undefined) {
+                console.log("inside hindi");
                 var updateDoc = {
                     $set: {
                       "CMarks.hindi" : cResult.hindi
                     },
                   };
             }
-            if (cResult.english !== null) {
+            if (cResult.english !== undefined) {
+                console.log("inside english");
                 var updateDoc = {
                     $set: {
                       "CMarks.english" : cResult.english
@@ -87,7 +90,7 @@ export const cResult = async (req, res) => {
                   };
             }
 
-            if (cResult.social !== null) {
+            if (cResult.social !== undefined) {
                 var updateDoc = {
                     $set: {
                       "CMarks.social" : cResult.social
@@ -144,7 +147,7 @@ export const dResult = async (req, res) => {
         the filter */
         const options = { upsert: false };
         // Specify the update to set a value for the plot field
-        if (dResult.science) {
+        if (dResult.science !== undefined) {
               var updateDoc = {
           $set: {
             "DMarks.science" : dResult.science
@@ -152,21 +155,21 @@ export const dResult = async (req, res) => {
         };
         }
         
-            if (dResult.maths !== null) {
+            if (dResult.maths !== undefined) {
                 var updateDoc = {
                     $set: {
                       "DMarks.maths" : dResult.maths
                     },
                   };
             }
-            if (dResult.hindi !== null) {
+            if (dResult.hindi !== undefined) {
                 var updateDoc = {
                     $set: {
                       "DMarks.hindi" : dResult.hindi
                     },
                   };
             }
-            if (dResult.english !== null) {
+            if (dResult.english !== undefined) {
                 var updateDoc = {
                     $set: {
                       "DMarks.english" : dResult.english
@@ -174,7 +177,7 @@ export const dResult = async (req, res) => {
                   };
             }
 
-            if (dResult.social !== null) {
+            if (dResult.social !== undefined) {
                 var updateDoc = {
                     $set: {
                       "DMarks.social" : dResult.social

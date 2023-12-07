@@ -1,21 +1,15 @@
-//this is my Subjects.jsx
-import React, { useEffect, useLayoutEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Subjects2 from '../Untaught/Subjects2'
-import CurrentScreen2 from '../Untaught/CurrentScreen2';
+import './Subjects1.css';
 
 function Subjects() {
-  const [subjects, setSubjects] = useState(["science",'maths', "social"]);
+  const [subjects, setSubjects] = useState(["Science", 'Maths', "Social"]);
   const [Usubjects, setUSubjects] = useState([]);
   const [Fsubjects, setFSubjects] = useState([]);
-const [dynamic , setDynamic] =useState(true);
+  const [dynamic, setDynamic] = useState(true);
   const navigate = useNavigate();
-  const allowDTest = ()=>{
 
-return true;
-  }
-
-
+ 
   useEffect(() => {
     let email = localStorage.getItem("email");
     // Fetch subjects from your server
@@ -61,53 +55,55 @@ if (Fsubjects.length == 0) {
      
   });
 
-  const checkDynamic = ()=>{
-    if (Fsubjects.length == 0) {
-      console.log("length is zero");
-      
-      return true;
-    }
-  }
   const giveTest = (subject) => {
-    navigate(`/${subject.replace(/\s/g, "")}1`)
-  }
+    navigate(`/${subject.replace(/\s/g, "")}1`);
+  };
 
-  const navigatePerformance= ()=>{
-navigate('/performance');
-  }
-  const navigateProfile= ()=>{
-navigate('/welcome');
-  }
+  const navigatePerformance = () => {
+    navigate('/performance');
+  };
+
+  const navigateProfile = () => {
+    navigate('/welcome');
+  };
+
   return (
     <>
-      <div>
-
-        { 
-     Fsubjects.length !== 0?
-        <>
-        <h2>Current Test Subjects</h2>
-        <div className="button-container border  ">
-          {subjects.map((subject, index) => (
-            !Usubjects.includes(subject.toLocaleLowerCase()) ? <button onClick={() => {  giveTest(subject) }} className="btn m-2 btn-primary " key={index}>{subject}</button>:<button onClick={() => { giveTest(subject) }} className="btn m-2 btn-primary disabled" key={index}>{subject}</button>
-            ))}
-        </div> </>:
-           <>
-          <div className='display-4'>Congraulations You have given Your All Current Tests</div>
-        <div >
-        <button className=' btn m-2 btn-primary' onClick={navigateProfile}>GO TO PROFILE </button>
-        <button className='btn m-2 btn-primary' onClick={navigatePerformance}>GO TO PERFORMANCE </button>
-   
+      <section className="main">
+        <div className="main-top">
+          {Fsubjects.length !== 0 ?
+            <>
+              <h1>Current Test Subjects</h1>
+              <section className="main-subjects">
+                {subjects.map((subject, index) => (
+                  !Usubjects.includes(subject.toLocaleLowerCase()) ?
+                    <div className="card" key={index}>
+                      <h3>{subject}</h3>
+                      <p>{`Strengthening ${subject} skills.`}</p>
+                      <button onClick={() => giveTest(subject)}>Get Started</button>
+                    </div>
+                    :
+                    <div className="card" key={index}>
+                      <h3>{subject}</h3>
+                      <p>Strengthening {subject} skills.</p>
+                      <button className="btn m-2 btn-primary disabled" onClick={() => giveTest("Maths")}>Get Started</button>
+                    </div>
+                ))}
+              </section>
+            </>
+            :
+            <>
+              <div className='display-4'>Congratulations! You have given all your current tests.</div>
+              <div>
+                <button className='btn m-2 btn-primary' onClick={navigateProfile}>GO TO PROFILE </button>
+                <button className='btn m-2 btn-primary' onClick={navigatePerformance}>GO TO PERFORMANCE </button>
+              </div>
+            </>
+          }
         </div>
-           </>
-        
-        }
-      
-      </div>
-      
-      
-
+      </section>
     </>
-  )
+  );
 }
 
-export default Subjects
+export default Subjects;

@@ -1,175 +1,176 @@
 import React, { useEffect, useRef, useState } from "react";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 import Chart from "chart.js/auto";
 import "./Performance.css";
-import axios from "axios";
 import { getstudentdata } from "../../service/quizapi";
-const Performance = () => {
 
+const Performance = () => {
   const chartRef1 = useRef(null);
   const chartRef2 = useRef(null);
   const chartInstance1 = useRef(null);
   const chartInstance2 = useRef(null);
-const [academicMarks, setAcademicMarks] = useState([]);
-const [fresh, setRefresh] = useState(false);
-const [currentMarks, setCurrentMarks] = useState([])
-const [dynamicMarks, setDynamicMarks] = useState([])
-const [academiSubjects, setAcademicSubjects] = useState([]);
-const [currentSubjects, setCurrentSubjects] = useState([])
-const [dynamicSubjects, setDynamicSubjects] = useState([])
-  const [performance, setperformance] = useState("");
-
+  const [academicMarks, setAcademicMarks] = useState([]);
+  const [fresh, setFresh] = useState(false);
+  const [currentMarks, setCurrentMarks] = useState([]);
+  const [dynamicMarks, setDynamicMarks] = useState([]);
+  const [academicSubjects, setAcademicSubjects] = useState([]);
+  const [currentSubjects, setCurrentSubjects] = useState([]);
+  const [dynamicSubjects, setDynamicSubjects] = useState([]);
+  const [performance, setPerformance] = useState("");
   const navigate = useNavigate();
 
+  const navigateToHome = () => {
+    navigate('/welcome');
+  };
 
+  const navigateToTest = () => {
+    navigate('/CurrentScreen2');
+  };
 
-  const navigatetohome =()=>{
+  const loadData = () => {
+    setFresh(!fresh);
+    console.log("Load data called");
+  };
 
-navigate('/welcome')
-  }
-  const navigatetotest =()=>{
-
-navigate('/CurrentScreen2')
-  }
-const loaddata = ()=>{
-  setRefresh(!fresh);
-  console.log("load data called");
-}
-  useEffect( () => {
+  useEffect(() => {
     const email = localStorage.getItem("email");
-    let Marks =  getstudentdata(email);
-console.log(Marks);
-Marks.then((data)=>{
-  console.log("data2 is given ");
-  console.log(data[2]);
-  let AMarks = [];
-  let CMarks = [];
-  let DMarks = [];
-  
-  let ASubjects= [];
-  let CSubjects = [];
-  let DSubjects = [];
-AMarks = Object.values(data[1]);
-CMarks = Object.values(data[2]);
-DMarks = Object.values(data[3]);
+    let Marks = getstudentdata(email);
 
-ASubjects = Object.keys(data[1]);
-CSubjects = Object.keys(data[2]);
-DSubjects = Object.keys(data[3]);
+    Marks.then((data) => {
+      console.log("Data received:", data[3]);
+    if(data[1] !== undefined){
 
-
-setAcademicMarks(AMarks);
-setCurrentMarks(CMarks);
-setDynamicMarks(DMarks);
-
-
-setAcademicSubjects(ASubjects);
-setCurrentSubjects(CSubjects);
-setDynamicSubjects(DSubjects);
-console.log("all work is");
-  console.log(academicMarks);
-  console.log(currentMarks);
-  console.log(dynamicMarks);
-})
-
-
-   },[]);
-  
-useEffect(() => {
-  if (chartInstance1.current) {
-    chartInstance1.current.destroy();
-  }
-  if (chartInstance2.current) {
-    chartInstance2.current.destroy();
-  }
-
-  const data1 = {
-    labels: currentSubjects,
-    datasets: [
-      {
-        data: currentMarks,
-        backgroundColor: ["red", "blue", "green"],
-      },
-    ],
-  };
-
-  // Data for the second chart
-  const data2 = {
-    labels: dynamicSubjects,
-    datasets: [
-      {
-        data:  dynamicMarks,
-        backgroundColor: ["orange", "purple", "pink"],
-      },
-    ],
-  };
-
-  // Chart 1
-  const ctx1 = chartRef1.current.getContext("2d");
-  chartInstance1.current = new Chart(ctx1, {
-    type: "pie",
-    data: data1,
-  });
-
-  // Chart 2
-  const ctx2 = chartRef2.current.getContext("2d");
-  chartInstance2.current = new Chart(ctx2, {
-    type: "bar",
-    data: data2,
-  });
-
-  const Asum = academicMarks.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-  console.log("sum of all is"+ " " + Asum)
-  const Csum = currentMarks.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-  console.log("sum of all is"+ " " + Csum)
-  const Dsum = currentMarks.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-  console.log("sum of all is"+ " " + Dsum)
-
-  let total = Asum  + ( Csum * 10) + (Dsum * 10);
-  total = Math.round(total /10);
-  if(total >70)
-  {
-    setperformance("Fast Learner")
-  } 
-  else{
-    if(total > 50){
-      setperformance("Average Learner")
+      var AMarks = Object.values(data[1]);
+      var ASubjects = Object.keys(data[1]);
     }
-    else{
-      setperformance("Slow Learner")
-    }
-  } 
-}, [fresh])
 
- 
+    if (data[2] !== undefined) {
+      
+      var CMarks = Object.values(data[2]);
+      var CSubjects = Object.keys(data[2]);
+    }
+    if(data[3] !== undefined)
+    {
+      var DMarks = Object.values(data[3]);
+      var DSubjects = Object.keys(data[3]);
+
+    }
+
+    
+     
+
+      setAcademicMarks(AMarks);
+      setCurrentMarks(CMarks);
+      setDynamicMarks(DMarks);
+
+      setAcademicSubjects(ASubjects);
+      setCurrentSubjects(CSubjects);
+      setDynamicSubjects(DSubjects);
+
+      console.log("All data loaded successfully");
+    });
+  }, [fresh]);
+
+  useEffect(() => {
+    if (chartInstance1.current) {
+      chartInstance1.current.destroy();
+    }
+    if (chartInstance2.current) {
+      chartInstance2.current.destroy();
+    }
+
+    const data1 = {
+      labels: currentSubjects,
+      datasets: [
+        {
+          data: currentMarks,
+          backgroundColor: ["red", "blue", "green"],
+        },
+      ],
+    };
+
+    const data2 = {
+      labels: dynamicSubjects,
+      datasets: [
+        {
+          data: dynamicMarks,
+          backgroundColor: ["orange", "purple", "pink"],
+        },
+      ],
+    };
+
+    const ctx1 = chartRef1.current.getContext("2d");
+    chartInstance1.current = new Chart(ctx1, {
+      type: "pie",
+      data: data1,
+    });
+
+    const ctx2 = chartRef2.current.getContext("2d");
+    chartInstance2.current = new Chart(ctx2, {
+      type: "bar",
+      data: data2,
+    });
+if (academicMarks != undefined) {
+  var Asum = academicMarks.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+  
+  console.log("Sum of all academic marks:", Asum);
+}
+
+if(currentMarks !== undefined)
+{
+  var Csum = currentMarks.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+  console.log("Sum of all current marks:", Csum);
+
+}
+if (dynamicMarks !== undefined) {
+  var Dsum = dynamicMarks.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+  console.log("Sum of all dynamic marks:", Dsum);
+  
+}
+if(Asum !== undefined && Csum !== undefined && Dsum !== undefined)
+{
+  let total = Asum + Csum + Dsum;
+  total = Math.round(total / 10);
+if (total > 70 ) {
+      setPerformance("Fast Learner");
+    } else {
+      if (total > 50) {
+        setPerformance("Average Learner");
+      } else {
+        setPerformance("Slow Learner");
+      }
+    }
+}
+
+    
+  }, [fresh, academicMarks, currentMarks, dynamicMarks, academicSubjects, currentSubjects, dynamicSubjects]);
 
   return (
     <div className="Performance">
       <h2>Test Performance</h2>
-      <button onClick={()=>{loaddata()}}className="btn btn-primary">Load Data</button>
-      <div className="chart-container">
-      
-        <h1>Current Test Performance</h1>
-        <canvas
-          style={{ border: "2px solid black", margin: "10px" }}
-          ref={chartRef1}
-        >
-        </canvas>
-        <h1>Dynamic Test Performance</h1>
-        <canvas style={{ border: "2px solid black" }} ref={chartRef2}></canvas>
+      <button onClick={loadData} className="btn btn-primary">Load Data</button>
+      <div className="chart-content">
+        <div>
+          <h1>Past Test Performance</h1>
+        </div>
+        <div>
+          <h1>Current Test Performance</h1>
+        </div>
       </div>
-      <div>
-        <h1>student categorization</h1>
-        <div>{parseInt(academicMarks)}</div>
+      <div className="chart-container">
+        <canvas style={{ border: "3px solid black", margin: "10px", height: "100px", width: "200px" }} ref={chartRef1}></canvas>
+        <canvas style={{ border: "3px solid black", margin: "5px", height: "290px", width: "200px" }} ref={chartRef2}></canvas>
+      </div>
+      <h1>Student Categorization</h1>
+  {dynamicMarks?.length == 3 ?<><div className="category" style={{ justifyContent: "center" }}>
+        <div>Your Marks: {parseInt(academicMarks)}</div>
         <div>Here is your Category</div>
         <div>{performance}</div>
-        
-      </div>
+      </div></>:<><div>Give All Tests to View Your Category</div></>}  
       <br />
       <div className="foot">
-
-<div onClick={()=>{ navigatetotest()}} className="btn btn-primary">Give Your Next Test</div>
-      <div onClick={()=>{ navigatetohome()}} className="btn btn-primary">Home Page</div>
+        <div onClick={navigateToTest} className="btn btn-primary">Give Your Next Test</div>
+        <div onClick={navigateToHome} className="btn btn-primary">Home Page</div>
       </div>
     </div>
   );

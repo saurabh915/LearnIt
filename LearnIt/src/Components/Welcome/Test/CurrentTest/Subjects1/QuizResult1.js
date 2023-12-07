@@ -20,7 +20,8 @@ function QuizResult1(props) {
     if (currentPath == "/Science1") {
       postcurrentTestR(email , {science: props.score});
      
-    } else if (currentPath == "/Math1") {
+    } else if (currentPath == "/Maths1") {
+      console.log("performing maths");
       postcurrentTestR(email , {maths: props.score});
     } else if (currentPath == "/Social1") {
       postcurrentTestR(email , {social: props.score});

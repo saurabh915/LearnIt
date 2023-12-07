@@ -66,17 +66,32 @@ setFSubjects(newArray);
   
   return (
     <>
-        <div>
+      
 
 { 
 Fsubjects.length !== 0?
 <>
-<h2>Dynamic Test Subjects</h2>
-<div className="button-container border  ">
+<section className="main">
+      <div className="main-top">
+        <h2> Dynamic Test Subjects</h2>
+        </div>
+        <section className="main-subjects">
   {subjects.map((subject, index) => (
-    !Usubjects.includes(subject.toLocaleLowerCase()) ? <button onClick={() => {  giveTest(subject) }} className="btn m-2 btn-primary " key={index}>{subject}</button>:<button onClick={() => { giveTest(subject) }} className="btn m-2 btn-primary disabled" key={index}>{subject}</button>
+    !Usubjects.includes(subject.toLocaleLowerCase()) ?
+    <div className="card">
+    <h3>{subject}</h3>
+    <p>Join Over 1 million Students.</p>
+    <button onClick={() => giveTest(subject)}>Get Started</button>
+  </div>
+    :
+    <div className="card">
+    <h3>{subject}</h3>
+    <p>Join Over 1 million Students.</p>
+    <button className='btn m-2 btn-primary disabled' onClick={() => giveTest(subject)}>Get Started</button>
+  </div>
     ))}
-</div> </>:
+</section></section> </>
+:
    <>
 
 
@@ -88,7 +103,7 @@ Fsubjects.length !== 0?
 </>
 }
 
-</div>
+
 
     </>
   )
